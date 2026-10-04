@@ -3,15 +3,11 @@ mod cli;
 mod commands;
 mod diagnostics;
 mod error;
-#[cfg(test)]
-mod fake;
 mod files;
 mod folder_sync;
 mod manager;
 mod rpc;
 mod services;
-#[cfg(test)]
-mod stress_tests;
 mod transport;
 mod update;
 

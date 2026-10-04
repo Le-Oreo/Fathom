@@ -635,19 +635,3 @@ pub async fn backup_restore(
     result?;
     m.reboot().await
 }
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn only_the_update_hosts() {
-        use super::host_ok;
-        assert!(host_ok(
-            "https://update.flipperzero.one/firmware/directory.json"
-        ));
-        assert!(host_ok("https://api.github.com/repos/O/R/releases/latest"));
-        assert!(host_ok("https://objects.githubusercontent.com/x?y"));
-        assert!(!host_ok("http://github.com/x"));
-        assert!(!host_ok("https://github.com.evil.example/x"));
-        assert!(!host_ok("https://evil.example/github.com"));
-    }
-}

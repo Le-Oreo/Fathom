@@ -26,7 +26,3 @@ dist-ssr
 # Rust
 src-tauri/target
 
-# Test output
-test-results
-playwright-report
-screens

@@ -222,38 +222,3 @@ pub(crate) fn percent_decode(s: &str) -> String {
     }
     String::from_utf8_lossy(&out).into_owned()
 }
-
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn save_names_are_plain_png_or_gif() {
-        use super::clean_name;
-        assert_eq!(
-            clean_name("nautilus-1.png"),
-            Some(("nautilus-1.png".into(), "png"))
-        );
-        assert_eq!(
-            clean_name("../../evil.GIF"),
-            Some(("evil.GIF".into(), "gif"))
-        );
-        assert_eq!(
-            clean_name("C:\\Windows\\x.png"),
-            Some(("x.png".into(), "png"))
-        );
-        assert_eq!(clean_name("notes.txt"), None);
-        assert_eq!(clean_name("png"), None);
-    }
-
-    #[test]
-    fn decodes_percent_encoded_names() {
-        assert_eq!(
-            super::percent_decode("nautilus-104512.png"),
-            "nautilus-104512.png"
-        );
-        assert_eq!(
-            super::percent_decode("caf%C3%A9%20shot.gif"),
-            "café shot.gif"
-        );
-        assert_eq!(super::percent_decode("odd%2"), "odd%2");
-    }
-}

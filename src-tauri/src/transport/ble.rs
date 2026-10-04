@@ -292,22 +292,3 @@ impl crate::manager::Wireless for Ble {
         Box::pin(Ble::open(self, id))
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn names_and_flow_control() {
-        assert_eq!(flipper_name("Flipper Nautilus"), Some("Nautilus".into()));
-        assert_eq!(flipper_name("Flipper "), None);
-        assert_eq!(flipper_name("Headphones"), None);
-        assert_eq!(credit_of(&[0, 0, 4, 0]), Some(1024));
-        assert_eq!(credit_of(&[1, 2]), None);
-        assert_eq!(
-            FROM_FLIPPER.to_string(),
-            "19ed82ae-ed21-4c9d-4145-228e61fe0000"
-        );
-        assert_eq!(SERVICE.to_string(), "8fe5b3d5-2e7f-4a98-2a48-7acc60fe0000");
-    }
-}

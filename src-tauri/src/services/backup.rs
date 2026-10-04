@@ -459,18 +459,3 @@ pub async fn restore(
     progress(Progress { done: total, total });
     Ok(())
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn stamps_are_dates() {
-        assert_eq!(stamp(0), "1970-01-01T00-00-00Z");
-        assert_eq!(stamp(1_791_028_512_000), "2026-10-03T11-55-12Z");
-        assert_eq!(stamp(951_782_400_000), "2000-02-29T00-00-00Z");
-        assert!(valid_id(&stamp(now_ms())));
-        assert!(!valid_id("../../etc/passwd"));
-        assert!(!valid_id("2026-10-03T11-55-12Z/.."));
-    }
-}

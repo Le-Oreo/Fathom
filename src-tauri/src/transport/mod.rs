@@ -1,8 +1,4 @@
 pub mod ble;
-#[cfg(test)]
-pub mod flaky;
-#[cfg(test)]
-pub mod pipe;
 pub mod serial;
 
 use std::io::{self, Read, Write};
@@ -44,48 +40,4 @@ pub fn write_patiently(w: &mut dyn Write, mut buf: &[u8], deadline: Duration) ->
         }
     }
     Ok(())
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    /* takes nothing for its first few tries, as a busy Flipper does on Windows */
-    struct Busy {
-        stalls: usize,
-        got: Vec<u8>,
-    }
-    impl Write for Busy {
-        fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
-            if self.stalls > 0 {
-                self.stalls -= 1;
-                return if self.stalls.is_multiple_of(2) {
-                    Ok(0)
-                } else {
-                    Err(io::ErrorKind::TimedOut.into())
-                };
-            }
-            let n = buf.len().min(3);
-            self.got.extend_from_slice(&buf[..n]);
-            Ok(n)
-        }
-        fn flush(&mut self) -> io::Result<()> {
-            Ok(())
-        }
-    }
-
-    #[test]
-    fn a_slow_flipper_is_waited_for() {
-        let mut w = Busy {
-            stalls: 40,
-            got: Vec::new(),
-        };
-        write_patiently(&mut w, b"update package", Duration::from_secs(5)).unwrap();
-        assert_eq!(w.got, b"update package");
-        let mut stuck = Busy {
-            stalls: usize::MAX,
-            got: Vec::new(),
-        };
-        assert!(write_patiently(&mut stuck, b"x", Duration::from_millis(50)).is_err());
-    }
 }

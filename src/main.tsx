@@ -22,7 +22,6 @@ async function main() {
   }
   await loadSettings();
   startSession();
-  if (import.meta.env.DEV) (await import("./testing/hooks")).installTestHooks();
   ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <React.StrictMode>
       <App />

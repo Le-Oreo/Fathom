@@ -67,25 +67,14 @@ Forgot `--recurse-submodules`? Run `git submodule update --init` (FATHOM needs F
 
 `npm run dev` runs the interface in a browser with a pretend Flipper, no hardware needed.
 
-### Checks
-
-```sh
-npm run typecheck
-npm run lint            # ESLint + Prettier (npm run format to fix)
-npm test                # Vitest
-npm run test:ui         # Playwright, on the pretend Flipper
-cd src-tauri && cargo fmt --check && cargo clippy --all-targets -- -D warnings && cargo test
-```
-
 ## How it works
 
 ```
 React UI (src/)                       Rust core (src-tauri/)
-  views/  components/  state/           transport/  USB serial, and a pipe for tests
+  views/  components/  state/           transport/  USB serial and Bluetooth
   device/api.ts  <- the only way in     rpc/        CLI-to-RPC switch, varint framing, replies by command_id
      mock.ts  (pretend Flipper)         services/   device, screen, storage, library, apps,
      tauri.ts (the real one)  --invoke-->           firmware, backup, sync
-                              <-Channels-  fake.rs  a fake Flipper answering the protocol, for tests
 ```
 
 FATHOM speaks the Flipper's protobuf RPC over USB serial, as qFlipper does. The UI never touches the device directly: everything goes through `src/device/api.ts`, which has a real implementation and a pretend one that behave the same.

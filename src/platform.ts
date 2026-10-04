@@ -63,12 +63,10 @@ export interface AppRelease {
   version: string;
   url: string;
 }
-let browserRelease: AppRelease | null = null;
-export const setBrowserRelease = (r: AppRelease | null) => (browserRelease = r);
 /* A FATHOM release newer than this one, or null. */
 export async function appLatest(): Promise<AppRelease | null> {
   if (isTauri()) return invoke<AppRelease | null>("app_latest");
-  return browserRelease;
+  return null;
 }
 export async function openRelease(url: string) {
   if (isTauri()) return invoke("app_release_open", { url });

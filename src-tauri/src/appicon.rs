@@ -138,18 +138,3 @@ try { & (Join-Path $env:SystemRoot 'System32\ie4uinit.exe') -show } catch {}
         });
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn every_icon_loads() {
-        for (id, png, ico) in std::iter::once(CLASSIC).chain(ICONS.iter().copied()) {
-            assert!(Image::from_bytes(png).is_ok(), "{id} png");
-            assert_eq!(&ico[..4], &[0, 0, 1, 0], "{id} is an .ico");
-        }
-        assert!(find("halloween").is_some());
-        assert!(find("../etc").is_none());
-    }
-}

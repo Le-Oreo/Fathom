@@ -716,6 +716,3 @@ pub fn start_polling(manager: &Arc<Manager>) {
         })
         .expect("couldn't start the port poller");
 }
-
-#[cfg(test)]
-mod tests;

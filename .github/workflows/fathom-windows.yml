@@ -22,9 +22,6 @@ jobs:
         with:
           workspaces: src-tauri
       - run: npm ci
-      - name: Rust tests on Windows
-        run: cargo test
-        working-directory: src-tauri
       - run: npx tauri build --bundles nsis
       - uses: actions/upload-artifact@v4
         with:

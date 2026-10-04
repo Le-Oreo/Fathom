@@ -3,7 +3,4 @@ src-tauri
 design
 src/styles
 src/assets
-test-results
-playwright-report
-screens
 package-lock.json

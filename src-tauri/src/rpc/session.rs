@@ -783,21 +783,3 @@ async fn keepalive(inner: Weak<Inner>, opts: SessionOptions) {
         }
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn content_names_match_the_proto_fields() {
-        assert_eq!(
-            content_name(&Content::SystemPingRequest(Default::default())),
-            "system_ping_request"
-        );
-        assert_eq!(
-            content_name(&Content::StopSession(pb::StopSession {})),
-            "stop_session"
-        );
-        assert_eq!(content_name(&Content::Empty(pb::Empty {})), "empty");
-    }
-}

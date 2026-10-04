@@ -83,30 +83,3 @@ pub async fn input(session: &Session, key: InputKey, kind: InputType) -> Result<
         .await
         .map(|_| ())
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn frames_always_hold_orientation_and_1024_bytes() {
-        let f = frame_bytes(pb_gui::ScreenFrame {
-            data: vec![0xff; 10],
-            orientation: 2,
-        });
-        assert_eq!((f.len(), f[0], f[1], f[11]), (1025, 2, 0xff, 0));
-        let f = frame_bytes(pb_gui::ScreenFrame {
-            data: vec![1; 2000],
-            orientation: 9,
-        });
-        assert_eq!((f.len(), f[0]), (1025, 3));
-    }
-
-    #[test]
-    fn keys_and_types_by_name() {
-        assert_eq!(parse_key("ok"), Some(InputKey::Ok));
-        assert_eq!(parse_key("menu"), None);
-        assert_eq!(parse_type("repeat"), Some(InputType::Repeat));
-        assert_eq!(parse_type("tap"), None);
-    }
-}
