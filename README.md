@@ -3,10 +3,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Le-Oreo/Fathom/releases"><img src="https://img.shields.io/github/v/release/Le-Oreo/Fathom?style=flat-square&color=ff8a1a&label=release" alt="Latest release"></a>
-  <img src="https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-1f1f23?style=flat-square" alt="Windows, macOS and Linux">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1f1f23?style=flat-square" alt="MIT license"></a>
-  <a href="https://github.com/Le-Oreo/Fathom/wiki"><img src="https://img.shields.io/badge/docs-wiki-1f1f23?style=flat-square" alt="Wiki"></a>
+  <a href="https://github.com/Le-Oreo/Fathom/releases"><img src="https://img.shields.io/badge/Download-ff8a1a?style=for-the-badge&logoColor=white" alt="Download"></a>
+  <img src="https://img.shields.io/badge/Windows%20%C2%B7%20macOS%20%C2%B7%20Linux-26262b?style=for-the-badge" alt="Windows, macOS and Linux">
+  <a href="https://github.com/Le-Oreo/Fathom/blob/main/LICENSE"><img src="https://img.shields.io/badge/MIT%20License-26262b?style=for-the-badge" alt="MIT license"></a>
+  <a href="https://github.com/Le-Oreo/Fathom/wiki"><img src="https://img.shields.io/badge/Wiki-26262b?style=for-the-badge" alt="Wiki"></a>
 </p>
 
 A desktop companion app for the **Flipper Zero**, in the same family as qFlipper and Flipper Lab. It mirrors and controls the Flipper's screen, manages its files, keeps a library of your saved signals, opens apps, installs firmware (official, Momentum, Unleashed and more), backs up and restores, and has a real command-line console. A pixel dolphin lives in the sidebar and reacts to what you do.
