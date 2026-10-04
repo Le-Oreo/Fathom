@@ -24,6 +24,18 @@
 
 Hold a key to hold the button.
 
+## On the Files page
+
+| Key | What it does |
+| --- | --- |
+| **Ctrl A** (⌘ A on Mac) | Select everything in the folder |
+| **Enter** or **Space** | Open the file or folder |
+| **↑ ↓ ← →** | Move between files |
+| **Backspace** or **Alt ↑** | Up one folder |
+| **F2** | Rename |
+| **Delete** | Delete (asks first) |
+| **Esc** | Clear the selection, or cancel a drag |
+
 ## In the Console
 
 | Key | What it does |
