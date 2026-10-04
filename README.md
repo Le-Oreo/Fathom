@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="design/fathom-logo.png" alt="FATHOM" width="640">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="design/fathom-logo-dark.png">
+    <img src="design/fathom-logo-light.png" alt="FATHOM" width="560">
+  </picture>
 </p>
 
 <p align="center">
