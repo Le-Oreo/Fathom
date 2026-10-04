@@ -1,31 +1,58 @@
-# Builds FATHOM's installers for every platform with tauri-action:
-#   Windows (NSIS .exe), macOS (.dmg for Apple Silicon and Intel), Linux (AppImage, .deb, .rpm).
-# It runs when this file changes, from the Actions tab ("Run workflow", once this file is on the
-# default branch), or on a tag like fathom-v0.2.0, which also attaches the installers to a draft
-# GitHub release. Download them from the run's "Artifacts" section.
-#
-# TODO(signing): the builds are unsigned, so Windows SmartScreen and macOS Gatekeeper warn on first
-# launch. Signing needs the owner's own certificates, added as repository secrets:
-#   macOS: APPLE_CERTIFICATE, APPLE_CERTIFICATE_PASSWORD, APPLE_SIGNING_IDENTITY, APPLE_ID,
-#          APPLE_PASSWORD, APPLE_TEAM_ID (tauri-action reads these from env to sign and notarize)
-#   Windows: a code-signing certificate, wired in through bundle.windows.signCommand or
-#            certificateThumbprint in src-tauri/tauri.conf.json
+# Builds the installers for Windows, macOS and Linux.
+# To make a release: Actions > FATHOM installers > Run workflow, and type the version (like 0.2.0).
+# It creates a draft release with the installers attached; publish it from the Releases page.
+# Without a version it only builds, and the installers are under the run's Artifacts.
 name: FATHOM installers
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release, like 0.2.0. Leave empty to only build."
+        required: false
+        default: ""
   push:
-    # branch pushes only when this file changes; tag pushes always (paths don't apply to tags)
     branches: ["**"]
-    tags: ["fathom-v*"]
     paths: [".github/workflows/fathom-release.yml"]
 
-# tauri-action creates the draft release on tags
 permissions:
   contents: write
 
 jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: (inputs.version || '') != ''
+    outputs:
+      id: ${{ steps.create.outputs.id }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: create
+        uses: actions/github-script@v7
+        env:
+          VERSION: ${{ inputs.version }}
+        with:
+          script: |
+            const fs = require("fs");
+            const version = process.env.VERSION.trim().replace(/^v/, "");
+            const tag = `fathom-v${version}`;
+            const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+            if (pkg.version !== version) {
+              core.setFailed(`package.json says ${pkg.version}, not ${version}. Bump the version first.`);
+              return;
+            }
+            const { data } = await github.rest.repos.createRelease({
+              ...context.repo,
+              tag_name: tag,
+              target_commitish: context.sha,
+              name: `FATHOM ${version}`,
+              body: fs.readFileSync(".github/release-notes.md", "utf8").replaceAll("{version}", version),
+              draft: true,
+            });
+            core.setOutput("id", data.id);
+
   build:
+    needs: release
+    if: always() && needs.release.result != 'failure' && needs.release.result != 'cancelled'
     strategy:
       fail-fast: false
       matrix:
@@ -72,9 +99,7 @@ jobs:
         with:
           projectPath: .
           args: ${{ matrix.args }}
-          tagName: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || '' }}
-          releaseName: ${{ startsWith(github.ref, 'refs/tags/') && format('FATHOM {0}', github.ref_name) || '' }}
-          releaseDraft: true
+          releaseId: ${{ needs.release.outputs.id }}
       - uses: actions/upload-artifact@v4
         with:
           name: FATHOM-${{ matrix.name }}
