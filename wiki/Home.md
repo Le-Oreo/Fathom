@@ -1,5 +1,5 @@
 <p align="center">
-  <picture><source media="(prefers-color-scheme: dark)" srcset="images/fathom-logo-dark.png"><img src="images/fathom-logo-light.png" alt="FATHOM" width="560"></picture>
+  <img src="images/fathom-banner.png" alt="FATHOM" width="620">
 </p>
 
 <h3 align="center">A free, open-source desktop app for the Flipper Zero</h3>

@@ -1,4 +1,4 @@
-<p align="center"><a href="Home"><picture><source media="(prefers-color-scheme: dark)" srcset="images/fathom-logo-dark.png"><img src="images/fathom-logo-light.png" alt="FATHOM" width="180"></picture></a></p>
+<p align="center"><a href="Home"><img src="images/fathom-banner.png" alt="FATHOM" width="200"></a></p>
 
 **[Home](Home)**
 
