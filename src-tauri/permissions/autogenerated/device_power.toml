@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-device-power"
+description = "Enables the device_power command without any pre-configured scope."
+commands.allow = ["device_power"]
+
+[[permission]]
+identifier = "deny-device-power"
+description = "Denies the device_power command without any pre-configured scope."
+commands.deny = ["device_power"]

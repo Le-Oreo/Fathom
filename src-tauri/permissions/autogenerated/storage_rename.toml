@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-storage-rename"
+description = "Enables the storage_rename command without any pre-configured scope."
+commands.allow = ["storage_rename"]
+
+[[permission]]
+identifier = "deny-storage-rename"
+description = "Denies the storage_rename command without any pre-configured scope."
+commands.deny = ["storage_rename"]

@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-cli-detach"
+description = "Enables the cli_detach command without any pre-configured scope."
+commands.allow = ["cli_detach"]
+
+[[permission]]
+identifier = "deny-cli-detach"
+description = "Denies the cli_detach command without any pre-configured scope."
+commands.deny = ["cli_detach"]

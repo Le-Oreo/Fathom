@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-cli-write"
+description = "Enables the cli_write command without any pre-configured scope."
+commands.allow = ["cli_write"]
+
+[[permission]]
+identifier = "deny-cli-write"
+description = "Denies the cli_write command without any pre-configured scope."
+commands.deny = ["cli_write"]

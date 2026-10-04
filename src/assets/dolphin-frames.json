@@ -1,0 +1,160 @@
+{
+ "cell": 64,
+ "cols": 8,
+ "names": [
+  "base",
+  "swim1",
+  "swim2",
+  "swim3",
+  "swim4",
+  "wave1",
+  "wave2",
+  "curious",
+  "reach",
+  "spin1",
+  "spin2",
+  "spin3",
+  "spin4",
+  "spin5",
+  "spin6",
+  "spin7",
+  "roll1",
+  "roll2",
+  "roll3",
+  "roll4",
+  "roll5"
+ ],
+ "boxes": {
+  "base": [
+   2,
+   10,
+   61,
+   50
+  ],
+  "swim1": [
+   2,
+   10,
+   61,
+   48
+  ],
+  "swim2": [
+   2,
+   10,
+   61,
+   47
+  ],
+  "swim3": [
+   3,
+   10,
+   61,
+   51
+  ],
+  "swim4": [
+   3,
+   10,
+   61,
+   52
+  ],
+  "wave1": [
+   2,
+   10,
+   61,
+   50
+  ],
+  "wave2": [
+   2,
+   10,
+   61,
+   50
+  ],
+  "curious": [
+   2,
+   10,
+   61,
+   50
+  ],
+  "reach": [
+   2,
+   10,
+   61,
+   50
+  ],
+  "spin1": [
+   12,
+   9,
+   52,
+   61
+  ],
+  "spin2": [
+   10,
+   3,
+   49,
+   62
+  ],
+  "spin3": [
+   8,
+   12,
+   60,
+   52
+  ],
+  "spin4": [
+   3,
+   15,
+   62,
+   55
+  ],
+  "spin5": [
+   12,
+   4,
+   52,
+   56
+  ],
+  "spin6": [
+   15,
+   3,
+   54,
+   62
+  ],
+  "spin7": [
+   4,
+   13,
+   56,
+   53
+  ],
+  "roll1": [
+   2,
+   19,
+   61,
+   43
+  ],
+  "roll2": [
+   3,
+   27,
+   59,
+   37
+  ],
+  "roll3": [
+   3,
+   28,
+   59,
+   38
+  ],
+  "roll4": [
+   2,
+   22,
+   61,
+   46
+  ],
+  "roll5": [
+   2,
+   15,
+   61,
+   55
+  ]
+ },
+ "markSize": [
+  34,
+  23
+ ],
+ "note": "Sprite sheet frames are cell x cell px, row-major, cols per row, in the order of names. boxes[name] = [x0, y0, x1, y1) of the visible pixels inside the cell."
+}

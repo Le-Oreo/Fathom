@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-upload-pick"
+description = "Enables the upload_pick command without any pre-configured scope."
+commands.allow = ["upload_pick"]
+
+[[permission]]
+identifier = "deny-upload-pick"
+description = "Denies the upload_pick command without any pre-configured scope."
+commands.deny = ["upload_pick"]

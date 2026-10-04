@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-input-send"
+description = "Enables the input_send command without any pre-configured scope."
+commands.allow = ["input_send"]
+
+[[permission]]
+identifier = "deny-input-send"
+description = "Denies the input_send command without any pre-configured scope."
+commands.deny = ["input_send"]

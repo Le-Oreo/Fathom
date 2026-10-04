@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-storage-md5"
+description = "Enables the storage_md5 command without any pre-configured scope."
+commands.allow = ["storage_md5"]
+
+[[permission]]
+identifier = "deny-storage-md5"
+description = "Denies the storage_md5 command without any pre-configured scope."
+commands.deny = ["storage_md5"]

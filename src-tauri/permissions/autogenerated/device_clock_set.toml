@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-device-clock-set"
+description = "Enables the device_clock_set command without any pre-configured scope."
+commands.allow = ["device_clock_set"]
+
+[[permission]]
+identifier = "deny-device-clock-set"
+description = "Denies the device_clock_set command without any pre-configured scope."
+commands.deny = ["device_clock_set"]

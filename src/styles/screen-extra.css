@@ -1,0 +1,4 @@
+/* a vertical picture: the screen stands on end */
+.scr.portrait canvas.lcd,.scr.portrait canvas.ghost,.scr.portrait .grid{width:calc(64px * var(--k));height:calc(128px * var(--k))}
+/* a key held down, from the mouse, touch or keyboard */
+.key.down{transform:translateY(2px);background:var(--key-lo);box-shadow:var(--press)}

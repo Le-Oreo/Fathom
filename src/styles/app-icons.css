@@ -1,0 +1,10 @@
+#row-appIcon{flex-wrap:wrap}
+.app-icons{display:flex;flex-wrap:wrap;align-items:center;gap:10px;flex-basis:100%}
+.app-icon{width:52px;height:52px;padding:6px;border:0;border-radius:14px;background:transparent;cursor:pointer;
+  transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+.app-icon img{display:block;width:40px;height:40px;image-rendering:auto}
+.app-icon:hover{transform:translateY(-1px)}
+.app-icon:active{transform:translateY(1px)}
+.app-icon[aria-checked="true"]{box-shadow:0 0 0 2px var(--orange)}
+.app-icon:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+.app-icons-sep{flex-basis:100%;margin-top:4px;font-size:13px;font-weight:600;color:var(--muted)}

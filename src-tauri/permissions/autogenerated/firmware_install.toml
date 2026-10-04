@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-firmware-install"
+description = "Enables the firmware_install command without any pre-configured scope."
+commands.allow = ["firmware_install"]
+
+[[permission]]
+identifier = "deny-firmware-install"
+description = "Denies the firmware_install command without any pre-configured scope."
+commands.deny = ["firmware_install"]

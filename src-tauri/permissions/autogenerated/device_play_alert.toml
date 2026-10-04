@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-device-play-alert"
+description = "Enables the device_play_alert command without any pre-configured scope."
+commands.allow = ["device_play_alert"]
+
+[[permission]]
+identifier = "deny-device-play-alert"
+description = "Denies the device_play_alert command without any pre-configured scope."
+commands.deny = ["device_play_alert"]

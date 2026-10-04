@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-dropped-items"
+description = "Enables the dropped_items command without any pre-configured scope."
+commands.allow = ["dropped_items"]
+
+[[permission]]
+identifier = "deny-dropped-items"
+description = "Denies the dropped_items command without any pre-configured scope."
+commands.deny = ["dropped_items"]

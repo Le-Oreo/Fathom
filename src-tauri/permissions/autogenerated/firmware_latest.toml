@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-firmware-latest"
+description = "Enables the firmware_latest command without any pre-configured scope."
+commands.allow = ["firmware_latest"]
+
+[[permission]]
+identifier = "deny-firmware-latest"
+description = "Denies the firmware_latest command without any pre-configured scope."
+commands.deny = ["firmware_latest"]

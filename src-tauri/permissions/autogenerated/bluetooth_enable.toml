@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-bluetooth-enable"
+description = "Enables the bluetooth_enable command without any pre-configured scope."
+commands.allow = ["bluetooth_enable"]
+
+[[permission]]
+identifier = "deny-bluetooth-enable"
+description = "Denies the bluetooth_enable command without any pre-configured scope."
+commands.deny = ["bluetooth_enable"]

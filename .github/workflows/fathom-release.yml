@@ -1,0 +1,87 @@
+# Builds FATHOM's installers for every platform with tauri-action:
+#   Windows (NSIS .exe), macOS (.dmg for Apple Silicon and Intel), Linux (AppImage, .deb, .rpm).
+# It runs when this file changes, from the Actions tab ("Run workflow", once this file is on the
+# default branch), or on a tag like fathom-v0.2.0, which also attaches the installers to a draft
+# GitHub release. Download them from the run's "Artifacts" section.
+#
+# TODO(signing): the builds are unsigned, so Windows SmartScreen and macOS Gatekeeper warn on first
+# launch. Signing needs the owner's own certificates, added as repository secrets:
+#   macOS: APPLE_CERTIFICATE, APPLE_CERTIFICATE_PASSWORD, APPLE_SIGNING_IDENTITY, APPLE_ID,
+#          APPLE_PASSWORD, APPLE_TEAM_ID (tauri-action reads these from env to sign and notarize)
+#   Windows: a code-signing certificate, wired in through bundle.windows.signCommand or
+#            certificateThumbprint in src-tauri/tauri.conf.json
+name: FATHOM installers
+
+on:
+  workflow_dispatch:
+  push:
+    # branch pushes only when this file changes; tag pushes always (paths don't apply to tags)
+    branches: ["**"]
+    tags: ["fathom-v*"]
+    paths: [".github/workflows/fathom-release.yml"]
+
+# tauri-action creates the draft release on tags
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            name: windows
+            args: "--bundles nsis"
+          - os: macos-latest
+            name: macos-apple-silicon
+            args: "--target aarch64-apple-darwin --bundles dmg"
+            rust-targets: aarch64-apple-darwin
+          - os: macos-latest
+            name: macos-intel
+            args: "--target x86_64-apple-darwin --bundles dmg"
+            rust-targets: x86_64-apple-darwin
+          - os: ubuntu-22.04
+            name: linux
+            args: "--bundles appimage,deb,rpm"
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Linux build dependencies
+        if: matrix.os == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf libudev-dev libdbus-1-dev rpm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.rust-targets }}
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+      - run: npm ci
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: .
+          args: ${{ matrix.args }}
+          tagName: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || '' }}
+          releaseName: ${{ startsWith(github.ref, 'refs/tags/') && format('FATHOM {0}', github.ref_name) || '' }}
+          releaseDraft: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FATHOM-${{ matrix.name }}
+          path: |
+            src-tauri/target/**/release/bundle/nsis/*.exe
+            src-tauri/target/**/release/bundle/dmg/*.dmg
+            src-tauri/target/**/release/bundle/appimage/*.AppImage
+            src-tauri/target/**/release/bundle/deb/*.deb
+            src-tauri/target/**/release/bundle/rpm/*.rpm
+          if-no-files-found: error
